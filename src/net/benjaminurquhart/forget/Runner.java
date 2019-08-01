@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.benjaminurquhart.forget.instructions.*;
+import net.benjaminurquhart.forget.memory.Cache;
+import net.benjaminurquhart.forget.memory.Pointer;
 import net.benjaminurquhart.forget.memory.PointerStack;
 import net.benjaminurquhart.forget.memory.RAM;
+import net.benjaminurquhart.forget.memory.ShortTerm;
 
 public class Runner {
 
@@ -24,6 +27,10 @@ public class Runner {
 		
 		int start = 0;
 		int depth = 0;
+		int res;
+		
+		Pointer tmp;
+		
 		for(int i = 0; i < instructions.length; i++) {
 			try {
 				if(instructions[i] == null) continue;
@@ -37,6 +44,12 @@ public class Runner {
 						if(instructions[i] instanceof While) depth++;
 						i++;
 					}
+				}
+				else if(instructions[i] instanceof MathExpr) {
+					res = ((MathExpr)instructions[i]).evaluate();
+					tmp = RAM.malloc();
+					RAM.writeMemory(tmp, new ShortTerm(res));
+					Cache.CURRENT_PTR = tmp;
 				}
 				// Other instructions
 				else {

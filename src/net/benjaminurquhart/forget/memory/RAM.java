@@ -38,7 +38,6 @@ public class RAM {
 	public static Memory forceRead(Pointer pointer) {
 		return memoryMap.get(pointer);
 	}
-	
 	// Writes to the given memory address. If the pointer happens to point
 	// to immutable (long-term) memory, it segfaults.
 	public static void writeMemory(Pointer pointer, int value) {
@@ -50,7 +49,7 @@ public class RAM {
 		}
 	}
 	
-	private static void writeMemory(Pointer pointer, Memory memory) {
+	public static void writeMemory(Pointer pointer, Memory memory) {
 		PointerStack.STACK.push(pointer);
 		memoryMap.put(pointer, memory);
 	}
