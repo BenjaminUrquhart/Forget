@@ -1,6 +1,8 @@
 # Forget
 A meme esolang
 
+TODO: actual docs
+
 This is a generated "Hello, world" program in Forget. 
 ```
 Pushes constants to the stack
