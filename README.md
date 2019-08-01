@@ -1,6 +1,8 @@
 # Forget
 A meme esolang
 
+[Esolang wiki page](https://esolangs.org/wiki/Forget)
+
 TODO: actual docs
 
 This is a generated "Hello, world" program in Forget. 
