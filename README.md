@@ -5,7 +5,9 @@ TODO: actual docs
 
 This is a generated "Hello, world" program in Forget. 
 ```
-Pushes constants to the stack
+// Remove these comments to run the program
+
+// Pushes constants to the stack
 const 0x0 10;
 const 0x1 33;
 const 0x2 100;
@@ -21,7 +23,7 @@ const 0xb 108;
 const 0xc 101;
 const 0xd 72;
 
-Cleanses the pointers, reads the values, and prints them
+// Cleanses the pointers, reads the values, and prints them
 cleanse 0xd;pop;out;
 cleanse 0xc;pop;out;
 cleanse 0xb;pop;out;
