@@ -11,6 +11,8 @@ import net.benjaminurquhart.forget.memory.RAM;
 
 public class Parser {
 
+	
+	// Don't touch it
 	public static List<Instruction> parse(String program) {
 		List<Instruction> out = new ArrayList<>();
 		String[] lines = program.replaceAll("(\\s){2,}|\n", "$1").split(";");

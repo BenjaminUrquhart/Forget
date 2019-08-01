@@ -18,6 +18,7 @@ public class Runner {
 		this.instructions = Parser.parse(program);
 	}
 	
+	// Runs the given program
 	public void run() {
 		Instruction[] instructions = this.instructions.toArray(new Instruction[0]);
 		
@@ -26,6 +27,8 @@ public class Runner {
 		for(int i = 0; i < instructions.length; i++) {
 			try {
 				if(instructions[i] == null) continue;
+				
+				// While loops
 				if(instructions[i] instanceof Condition && !((Condition)instructions[i]).evaluate()) {
 					depth = 1;
 					start = i++;
@@ -35,10 +38,13 @@ public class Runner {
 						i++;
 					}
 				}
+				// Other instructions
 				else {
 					instructions[i].execute();
 				}
 				if(i >= instructions.length) break;
+				
+				// "end" statement
 				if(instructions[i] instanceof Jump) {
 					i = ((Jump)instructions[i]).getJump();
 				}
@@ -56,6 +62,8 @@ public class Runner {
 				break;
 			}
 		}
+		
+		// Print the stack and memory
 		System.out.println("Stack: ");
 		System.out.println(PointerStack.STACK);
 		System.out.println("\nValues:");

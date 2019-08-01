@@ -9,6 +9,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import net.benjaminurquhart.forget.exceptions.Segfault;
 
+// Represents the pool of memory the program uses
+// If more than one program is run, they share
+// memory because global state
 public class RAM {
 
 	private static Map<Pointer, Memory> memoryMap = Collections.synchronizedMap(new HashMap<>());

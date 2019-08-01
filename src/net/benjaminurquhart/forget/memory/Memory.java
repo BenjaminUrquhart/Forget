@@ -1,5 +1,6 @@
 package net.benjaminurquhart.forget.memory;
 
+// Represents a value stored in memory
 public abstract class Memory {
 	
 	protected int value;

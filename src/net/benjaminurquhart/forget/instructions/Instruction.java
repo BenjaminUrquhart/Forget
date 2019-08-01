@@ -6,6 +6,7 @@ public abstract class Instruction {
 
 	public abstract void execute();
 	
+	// Don't judge
 	@Override
 	public String toString() {
 		StringBuilder out = new StringBuilder(this.getClass().getSimpleName()+"[");

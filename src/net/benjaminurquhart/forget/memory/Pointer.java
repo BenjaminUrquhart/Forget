@@ -6,6 +6,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import net.benjaminurquhart.forget.exceptions.Segfault;
 
+
+// Represents a pointer. If this was C, these would be real pointers
+// I could also use Unsafe, but that requires effort
 public class Pointer {
 
 	private int value;
@@ -19,6 +22,8 @@ public class Pointer {
 	protected static void put(Pointer pointer) {
 		CACHE.put(pointer.getValue(), pointer);
 	}
+	
+	
 	protected Pointer() {
 		this(ThreadLocalRandom.current().nextInt());
 	}
