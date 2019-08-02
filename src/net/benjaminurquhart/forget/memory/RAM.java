@@ -36,7 +36,7 @@ public class RAM {
 	
 	// Used for printing the stack after execution
 	public static Memory forceRead(Pointer pointer) {
-		return memoryMap.get(pointer);
+		return memoryMap.computeIfAbsent(pointer, p -> new ShortTerm(0));
 	}
 	// Writes to the given memory address. If the pointer happens to point
 	// to immutable (long-term) memory, it segfaults.

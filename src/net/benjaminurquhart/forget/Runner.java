@@ -76,7 +76,7 @@ public class Runner {
 				System.err.println(instructions[start]);
 			}
 			catch(Exception e) {
-				System.err.println("Exception at instruction "+i+":");
+				System.err.println("\nException at instruction "+i+":");
 				System.err.println(instructions[i]);
 				e.printStackTrace();
 				break;
