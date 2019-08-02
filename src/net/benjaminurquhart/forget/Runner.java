@@ -30,19 +30,24 @@ public class Runner {
 		int res;
 		
 		Pointer tmp;
+		Condition condition;
 		
 		for(int i = 0; i < instructions.length; i++) {
 			try {
 				if(instructions[i] == null) continue;
 				
+				//System.err.println(instructions[i]);
 				// While loops
-				if(instructions[i] instanceof Condition && !((Condition)instructions[i]).evaluate()) {
-					depth = 1;
-					start = i++;
-					while(depth > 0) {
-						if(instructions[i] instanceof Jump) depth--;
-						if(instructions[i] instanceof While) depth++;
-						i++;
+				if(instructions[i] instanceof Condition) {
+					condition = (Condition)instructions[i];
+					if(!condition.evaluate()) {
+						depth = 1;
+						start = i++;
+						while(depth > 0) {
+							if(instructions[i] instanceof Jump) depth--;
+							if(instructions[i] instanceof Condition) depth++;
+							i++;
+						}
 					}
 				}
 				else if(instructions[i] instanceof MathExpr) {
@@ -50,6 +55,7 @@ public class Runner {
 					tmp = RAM.malloc();
 					RAM.writeMemory(tmp, new ShortTerm(res));
 					Cache.CURRENT_PTR = tmp;
+					PointerStack.STACK.push(tmp);
 				}
 				// Other instructions
 				else {
@@ -60,6 +66,7 @@ public class Runner {
 				// "end" statement
 				if(instructions[i] instanceof Jump) {
 					i = ((Jump)instructions[i]).getJump();
+					i--;
 				}
 				RAM.tick();
 			}
@@ -77,15 +84,18 @@ public class Runner {
 		}
 		
 		// Print the stack and memory
-		System.out.println("Stack: ");
+		System.out.println("\nStack: ");
 		System.out.println(PointerStack.STACK);
 		System.out.println("\nValues:");
 		List<String> values = new ArrayList<>();
 		while(!PointerStack.STACK.isEmpty()) {
-			values.add(Integer.toHexString(RAM.forceRead(PointerStack.STACK.pop()).read()));
+			values.add("0x"+Integer.toHexString(RAM.forceRead(PointerStack.STACK.pop()).read()));
 		}
 		System.out.println(values);
-		values.stream().map(c -> (char)Integer.parseInt(c,16)+"").forEach(System.out::print);
+		values.stream()
+			  .map(c -> Character.toString((char)Integer.parseInt(c.substring(2),16)))
+			  .map(s -> s.equals("\n") ? "\\n" : s)
+			  .forEach(System.out::print);
 		System.out.println();
 		System.out.println("\nMemory:");
 		System.out.println(RAM.getRAMAsString());

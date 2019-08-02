@@ -33,7 +33,7 @@ public class Forget {
 				program+="cleanse 0x"+Integer.toHexString(ptr-i-1)+";pop;out;";
 			}
 		}
-		System.out.println("Program:\n"+program+"\n\nStandard Ouput:");
+		System.out.println("Program:\n"+program+"\n\nStandard IO:");
 		
 		Runner runner = new Runner(program);
 		runner.run();

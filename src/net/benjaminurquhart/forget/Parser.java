@@ -54,6 +54,13 @@ public class Parser {
 				out.add(new While(Pointer.get(Integer.parseInt(args[1].substring(2),16))));
 				jmpStack.push(i);
 			}
+			else if(line.matches("in(?: 0x(?:[0-9A-Fa-f]+))?")) {
+				out.add(new Input(args.length > 1 ? Pointer.get(Integer.parseInt(args[1].substring(2),16)) : null));
+			}
+			else if(line.equals("hasin")) {
+				out.add(new HasInput());
+				jmpStack.push(i);
+			}
 			else if(line.matches("add (?:0x)?[0-9a-fA-F]+(?: (?:0x)?[0-9a-fA-F]+)?")) {
 				if(args[1].startsWith("0x")) {
 					p1 = Pointer.get(Integer.parseInt(args[1].substring(2), 16));
