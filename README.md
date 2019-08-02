@@ -1,5 +1,5 @@
 # Forget
-A meme esolang
+A meme esolang. Inspired by Ghosty [(TrenchFroast)](https://github.com/TrenchFroast)
 
 [Esolang wiki page](https://esolangs.org/wiki/Forget)
 
