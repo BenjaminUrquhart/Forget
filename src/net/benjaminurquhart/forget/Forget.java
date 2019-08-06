@@ -2,12 +2,17 @@ package net.benjaminurquhart.forget;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class Forget {
+	
+	public static boolean debug = false;
 
 	public static void main(String[] args) {
 		String program = "";
+		
+		debug = Arrays.asList(args).contains("--debug");
 		
 		if(args.length > 0) {
 			try {
@@ -33,7 +38,7 @@ public class Forget {
 				program+="cleanse 0x"+Integer.toHexString(ptr-i-1)+";pop;out;";
 			}
 		}
-		System.out.println("Program:\n"+program+"\n\nStandard IO:");
+		if(debug) System.out.println("Program:\n"+program+"\n\nStandard IO:");
 		
 		Runner runner = new Runner(program);
 		runner.run();

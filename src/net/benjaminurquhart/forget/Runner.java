@@ -82,22 +82,23 @@ public class Runner {
 				break;
 			}
 		}
-		
-		// Print the stack and memory
-		System.out.println("\nStack: ");
-		System.out.println(PointerStack.STACK);
-		System.out.println("\nValues:");
-		List<String> values = new ArrayList<>();
-		while(!PointerStack.STACK.isEmpty()) {
+		if(Forget.debug) {
+			// Print the stack and memory
+			System.out.println("\nStack: ");
+			System.out.println(PointerStack.STACK);
+			System.out.println("\nValues:");
+			List<String> values = new ArrayList<>();
+			while(!PointerStack.STACK.isEmpty()) {
 			values.add("0x"+Integer.toHexString(RAM.forceRead(PointerStack.STACK.pop()).read()));
+			}
+			System.out.println(values);
+			values.stream()
+			  	  .map(c -> Character.toString((char)Integer.parseInt(c.substring(2),16)))
+			  	  .map(s -> s.equals("\n") ? "\\n" : s)
+			  	  .forEach(System.out::print);
+			System.out.println();
+			System.out.println("\nMemory:");
+			System.out.println(RAM.getRAMAsString());
 		}
-		System.out.println(values);
-		values.stream()
-			  .map(c -> Character.toString((char)Integer.parseInt(c.substring(2),16)))
-			  .map(s -> s.equals("\n") ? "\\n" : s)
-			  .forEach(System.out::print);
-		System.out.println();
-		System.out.println("\nMemory:");
-		System.out.println(RAM.getRAMAsString());
 	}
 }
